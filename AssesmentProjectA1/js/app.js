@@ -20,7 +20,7 @@ button0.addEventListener("click", function(){
   getRandomNumberOneToSixForai();
   showPlayerRollResult();
   showaiRollResult();
-
+  determineWinner()
 })
 
 // CONTROLLERS
@@ -32,10 +32,17 @@ function getRandomNumberOneToSixForai() {
   aiRoll = Math.floor(Math.random() * 6) + 1
 }
 
-function findWinner(number) {
-  let highestNumber = Math.max (1,6)
+function determineWinner() {
+  if (playerRoll === aiRoll) {
+    result.innerText = "IT´S A DRAW!";
+  }
+  else if (playerRoll < aiRoll) {
+    result.innerText = "YOU LOSE!";
+  }
+  else {
+    result.innerText = "YOU WIN!";
+  }
 }
-
 
 // VIEWS
 function showPlayerRollResult() {
