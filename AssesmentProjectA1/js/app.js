@@ -8,11 +8,17 @@ let playerRollText= document.getElementById("playerRollText");
 let aiRollText= document.getElementById("aiRollText");
 let result= document.getElementById("result");
 
-// define that the highest number is
+let playerScoreText= document.getElementById("playerScoreText");
+let aiScoreText= document.getElementById("aiScoreText");
+
 
 // Data
 let playerRoll = 0;
 let aiRoll=0;
+
+let playerScore= 0;
+let aiScore= 0;
+
 
 // PROCESS
 button0.addEventListener("click", function(){
@@ -20,7 +26,8 @@ button0.addEventListener("click", function(){
   getRandomNumberOneToSixForai();
   showPlayerRollResult();
   showaiRollResult();
-  determineWinner()
+  determineWinner();
+  updateScore();
 })
 
 // CONTROLLERS
@@ -38,11 +45,14 @@ function determineWinner() {
   }
   else if (playerRoll < aiRoll) {
     result.innerText = "YOU LOSE!";
+    aiScore++
   }
   else {
     result.innerText = "YOU WIN!";
+    playerScore++;
   }
 }
+
 
 // VIEWS
 function showPlayerRollResult() {
@@ -51,4 +61,9 @@ function showPlayerRollResult() {
 
 function showaiRollResult() {
   aiRollText.innerHTML= "AI: " + aiRoll;
+}
+
+function updateScore() {
+  playerScoreText.innerHTML= "Player: " + playerScore.toString() + " wins";
+  aiScoreText.innerHTML= "AI: " + aiScore.toString() + " wins";
 }
