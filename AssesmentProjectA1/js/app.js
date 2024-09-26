@@ -21,6 +21,9 @@ let aiScore= 0;
 
 
 // PROCESS
+tryLoadGame();
+updateScore();
+
 button0.addEventListener("click", function(){
   getRandomNumberOneToSixForPlayer();
   getRandomNumberOneToSixForai();
@@ -28,6 +31,7 @@ button0.addEventListener("click", function(){
   showaiRollResult();
   determineWinner();
   updateScore();
+  saveAsCookie();
 })
 
 // CONTROLLERS
@@ -53,7 +57,6 @@ function determineWinner() {
   }
 }
 
-
 // VIEWS
 function showPlayerRollResult() {
   playerRollText.innerHTML= "Player: " + playerRoll;
@@ -67,3 +70,36 @@ function updateScore() {
   playerScoreText.innerHTML= "Player: " + playerScore.toString() + " wins";
   aiScoreText.innerHTML= "AI: " + aiScore.toString() + " wins";
 }
+
+
+// COOKIES
+
+
+function saveAsCookie() {
+  document.cookie = "playerScore=" + playerScore + ";expires=Tue, 31 Dec 2024 12:00:00 UTC";
+  document.cookie = "aiScore=" + aiScore + ";expires=Tue, 31 Dec 2024 12:00:00 UTC";
+}
+
+function tryLoadGame() {
+  playerScore= getCookie("playerScore");
+  aiScore= getCookie("aiScore");
+}
+
+
+function getCookie(cname) {
+  let name = cname + "="
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) === ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) === 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return 0;
+}
+
+
